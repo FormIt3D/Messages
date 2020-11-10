@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  <title>FormIt Messages</title>
+  <META NAME="Title" CONTENT="FormIt Messages">
+  <META NAME="Author" CONTENT="Autodesk FormIt">
+</head>
+<body>
+
+<h1 >FormIt Messages</h1>
+
+<ul class="instructions">
+  <li>Click on an item to subscribe to the Message</li>
+  <li>Invoke the action the Message watches for</li>
+  <li>Watch the console for the message:</li>
+  <ul>
+    <li>Windows: Window menu > Script Output</li>
+    <!-- <li>Web (Chrome): F12 Developer Tools > Console</li> -->
+  </ul>
+</ul>
+
+<hr>
+
+<ul class="FormItMessagesUL" id="FormItMessagesUL">
+</ul>
+
+<script type="text/javascript" src="https://formit3d.github.io/FormItExamplePlugins/SharedPluginFiles/FormItInterface.js"></script>
+<script type="text/javascript" src="messages.js"></script>
+<script>
+FormItInterface.Initialize(function () {
+    // Add a "checked" symbol when clicking on a list item
+    var list = document.getElementById("FormItMessagesUL");
+    list.addEventListener('click', function(ev) {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked');
+        var subscribe = ev.target.classList.contains('checked');
+        if (subscribe)
+        {
+            //FormItInterface.ConsoleLog("Subscribe: " + ev.target.innerText);
+            // This will register a listener on the HTML UI side.
+            FormItInterface.SubscribeMessage(ev.target.innerText, function(payload)
+            {
+                // This callback will be invoked whenever the signal is emitted on the C++/QML side.
+                FormItInterface.ConsoleLog("(Web Side) msg: " + ev.target.innerText + " Paylaod: " + payload);
+            });
+            //FormItInterface.ConsoleLog("About to call MessagesPluginSubscribe");
+            // This will register a listener on the FormIt side.
+            FormItInterface.CallMethod("MessagesPluginSubscribe", ev.target.innerText);
+        }
+        else
+        {
+            // This will unsubscribe a listener on the HTML UI side.
+            FormItInterface.UnsubscribeMessage(ev.target.innerText);
+            // This will unsubscribe a listener on the FormIt side.
+            FormItInterface.CallMethod("MessagesPluginUnsubscribeMessage", ev.target.innerText);
+        }
+      }
+    }, false);
+
+    LoadMessages();
+});  // DOMContentLoaded
+</script>
+
+</body>
+</html>
+
