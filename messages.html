@@ -42,7 +42,7 @@ FormItInterface.Initialize(function () {
             FormItInterface.SubscribeMessage(ev.target.innerText, function(payload)
             {
                 // This callback will be invoked whenever the signal is emitted on the C++/QML side.
-                FormItInterface.ConsoleLog("(Web Side) msg: " + ev.target.innerText + " Paylaod: " + payload);
+                FormItInterface.ConsoleLog("(Web Side) msg: " + ev.target.innerText + " Paylaod: " + JSON.stringify(payload));
             });
             //FormItInterface.ConsoleLog("About to call MessagesPluginSubscribe");
             // This will register a listener on the FormIt side.
