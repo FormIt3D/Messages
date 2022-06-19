@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+  <title>FormIt Messages</title>
+</head>
+
+<body>
+  <div id="appRoot"></div>
+  <script type="text/javascript" src="https://formit3d.github.io/SharedPluginUtilities/v23_0/FormItInterface.js"></script>
+  <script src="https://unpkg.com/react@15/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+  <script src="app.js"></script>
+  <script type="text/javascript">
+    FormItInterface.Initialize(async() => {
+      console.log("FormIt Initialized");
+      new MessagesApp();
+    });
+    </script>
+</body>
+
+</html>

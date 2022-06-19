@@ -1,0 +1,16 @@
+[
+    {
+        "version":{
+            "major":1,
+            "minor":0
+        },
+        "path":"Messages_v1"
+    },
+    {
+        "version":{
+            "major":23,
+            "minor":0
+        },
+        "path":"Messages_v2"
+    }
+]
